@@ -1,0 +1,32 @@
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = {
+    "Date": pd.date_range("2025-01-01", periods=10, freq="D"),
+    "Product": ["A", "B", "C", "A", "B", "C", "A", "B", "C", "A"],
+    "Sales": [120, 150, 90, 200, 180, 75, 160, 190, 100, 220]
+}
+
+df = pd.DataFrame(data)
+
+
+print("Sales Data:")
+print(df.head())
+
+sales_by_product = df.groupby("Product")["Sales"].sum()
+print("\nTotal Sales by Product:")
+print(sales_by_product)
+
+plt.figure(figsize=(8,5))
+plt.plot(df["Date"], df["Sales"], marker="o")
+plt.title("Daily Sales Trend")
+plt.xlabel("Date")
+plt.ylabel("Sales")
+plt.grid(True)
+plt.show()
+
+# Plot total sales per product
+sales_by_product.plot(kind="bar", figsize=(6,4), title="Total Sales by Product")
+plt.ylabel("Sales")
+plt.show()
